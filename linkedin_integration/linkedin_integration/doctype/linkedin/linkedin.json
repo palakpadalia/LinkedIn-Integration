@@ -24,7 +24,6 @@
  ],
  "fields": [
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "account_name",
    "fieldtype": "Data",
    "label": "Account Name"
@@ -34,20 +33,18 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "company_id",
    "fieldtype": "Data",
    "label": "Company ID",
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.enable == 1",
+   "depends_on": "eval:doc.enable == 1;",
    "fieldname": "oauth_details",
    "fieldtype": "Section Break",
    "label": "OAuth Credentials"
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "consumer_key",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -59,7 +56,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "consumer_secret",
    "fieldtype": "Password",
    "in_list_view": 1,
@@ -67,27 +63,24 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.enable == 1",
+   "depends_on": "eval:doc.enable == 1;",
    "fieldname": "user_details_section",
    "fieldtype": "Section Break",
    "label": "User Details"
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "access_token",
    "fieldtype": "Small Text",
    "label": "Access Token",
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "person_urn",
    "fieldtype": "Data",
    "label": "Person URN",
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.enable == 1",
    "fieldname": "session_status",
    "fieldtype": "Select",
    "label": "Session Status",
@@ -101,6 +94,7 @@
    "label": "Enable"
   },
   {
+   "depends_on": "eval:doc.enable == 1;",
    "fieldname": "section_break_r3exw",
    "fieldtype": "Section Break"
   },
@@ -111,7 +105,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2024-03-18 15:38:46.211612",
+ "modified": "2024-03-18 16:37:48.021278",
  "modified_by": "Administrator",
  "module": "LinkedIn Integration",
  "name": "LinkedIn",
