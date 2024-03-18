@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "creation": "2024-01-23 15:16:19.592179",
+ "default_view": "List",
+ "doctype": "DocType",
+ "documentation": "https://docs.erpnext.com/docs/user/manual/en/CRM/linkedin-settings",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable",
+  "section_break_r3exw",
+  "account_name",
+  "column_break_2",
+  "company_id",
+  "oauth_details",
+  "consumer_key",
+  "column_break_5",
+  "consumer_secret",
+  "user_details_section",
+  "access_token",
+  "person_urn",
+  "session_status",
+  "column_break_2hvvi"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "account_name",
+   "fieldtype": "Data",
+   "label": "Account Name"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "company_id",
+   "fieldtype": "Data",
+   "label": "Company ID",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "oauth_details",
+   "fieldtype": "Section Break",
+   "label": "OAuth Credentials"
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "consumer_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Consumer Key",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "consumer_secret",
+   "fieldtype": "Password",
+   "in_list_view": 1,
+   "label": "Consumer Secret",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "user_details_section",
+   "fieldtype": "Section Break",
+   "label": "User Details"
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "access_token",
+   "fieldtype": "Small Text",
+   "label": "Access Token",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "person_urn",
+   "fieldtype": "Data",
+   "label": "Person URN",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.enable == 1",
+   "fieldname": "session_status",
+   "fieldtype": "Select",
+   "label": "Session Status",
+   "options": "Expired\nActive",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "Enable"
+  },
+  {
+   "fieldname": "section_break_r3exw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_2hvvi",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-03-18 15:38:46.211612",
+ "modified_by": "Administrator",
+ "module": "LinkedIn Integration",
+ "name": "LinkedIn",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

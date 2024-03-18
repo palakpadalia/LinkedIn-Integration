@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-23 17:17:13.325544",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "text",
+  "column_break_xpbjr",
+  "post_id",
+  "media",
+  "video"
+ ],
+ "fields": [
+  {
+   "fieldname": "text",
+   "fieldtype": "Small Text",
+   "label": "Text"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "media",
+   "fieldtype": "Attach",
+   "label": "Media"
+  },
+  {
+   "fieldname": "video",
+   "fieldtype": "Attach",
+   "label": "video"
+  },
+  {
+   "fieldname": "post_id",
+   "fieldtype": "Data",
+   "label": "Post Id"
+  },
+  {
+   "fieldname": "column_break_xpbjr",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-03-18 15:28:13.249715",
+ "modified_by": "Administrator",
+ "module": "LinkedIn Integration",
+ "name": "Linkedin Post",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
