@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 
-from urllib.parse import urlencode, unquote
+from urllib.parse import urlencode ,unquote
 
 import frappe
 import requests
@@ -12,6 +12,7 @@ from frappe.utils import get_url_to_form
 from frappe.utils.file_manager import get_file_path
 
 
+
 class LinkedIn(Document):
     @frappe.whitelist()
     def get_authorization_url(self):
@@ -19,7 +20,7 @@ class LinkedIn(Document):
             {
                 "response_type": "code",
                 "client_id": self.consumer_key,
-                "redirect_uri": "{0}/api/method/social_media.social_media.doctype.linkedin.linkedin.callback?".format(
+                "redirect_uri": "{0}/api/method/linkedin_integration.linkedin_integration.doctype.linkedin.linkedin.callback?".format(
                     frappe.utils.get_url()
                 ),
                 "scope": "profile email openid w_member_social",
@@ -37,7 +38,7 @@ class LinkedIn(Document):
             "code": code,
             "client_id": self.consumer_key,
             "client_secret": self.get_password(fieldname="consumer_secret"),
-            "redirect_uri": "{0}/api/method/social_media.social_media.doctype.linkedin.linkedin.callback?".format(
+            "redirect_uri": "{0}/api/method/linkedin_integration.linkedin_integration.doctype.linkedin.linkedin.callback?".format(
                 frappe.utils.get_url()
             ),
         }
@@ -59,29 +60,29 @@ class LinkedIn(Document):
             {
                 "person_urn": parsed_response["sub"],
                 "account_name": parsed_response["name"],
-                "session_status": "Active",
+                "session_status": "Active",	
             },
         )
 
         frappe.local.response["type"] = "redirect"
         frappe.local.response["location"] = get_url_to_form("LinkedIn", "LinkedIn")
 
-    def post(self, text, title, docname, media=None, video=None):
+    def post(self, text, title, docname , media=None, video=None):
 
         if not media and not video:
-            return self.post_text(text, title, docname)
+            return self.post_text(text, title ,docname)
         elif media:
             media_id = self.upload_image(media)
 
             if media_id:
-                return self.post_text(text, title, docname, media_id=media_id)
+                return self.post_text(text, title , docname , media_id=media_id)
 
             else:
                 self.log_error("LinkedIn: Failed to upload media")
         elif video:
             video_id = self.upload_image(media, video)
             if video_id:
-                return self.post_text(text, title, docname, video_id=video_id)
+                return self.post_text(text, title , docname , video_id=video_id)
             else:
                 self.log_error("LinkedIn: Failed to upload media")
 
@@ -149,7 +150,7 @@ class LinkedIn(Document):
             return asset
         return None
 
-    def post_text(self, text, title, docname, media_id=None, video_id=None):
+    def post_text(self, text, title, docname , media_id=None, video_id=None):
         url = "https://api.linkedin.com/v2/ugcPosts"
         headers = self.get_headers()
         headers["X-Restli-Protocol-Version"] = "2.0.0"
@@ -206,23 +207,25 @@ class LinkedIn(Document):
                 "visibility": {"com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"},
             }
 
-        response = self.http_post(docname=docname, url=url, headers=headers, body=body)
-        frappe.msgprint("LinkedIn Post Share Successfully ", indicator="green")
+        response = self.http_post(docname=docname ,url=url, headers=headers, body=body )
+        frappe.msgprint("LinkedIn Post Share Successfully ", indicator='green')
+       
         return response
 
-    def http_post(self, url, docname=None, headers=None, body=None, data=None):
+    def http_post(self, url,docname=None , headers=None, body=None, data=None):
         try:
             # Send POST request to the specified URL
             response = requests.post(url=url, json=body, data=data, headers=headers)
-
-            if response.status_code in [201]:
+             
+            if response.status_code  in [201]:   	
                 urn_post = response.headers.get("Location")
                 if urn_post:
-                    urn_id = urn_post.split("/")
-                    post_id = unquote(urn_id[-1])
-                    frappe.db.set_value("linkedin Post", docname, "post_id", post_id)
+                    urn_id =urn_post.split("/")
+                    post_id =  unquote(urn_id[-1])
+                    frappe.db.set_value("Linkedin Post", docname, "post_id", post_id)
                     self.save()
-
+					
+           
             elif response.status_code not in [201, 200]:
                 raise requests.exceptions.HTTPError(
                     f"Unexpected status code: {response.status_code}"
@@ -250,12 +253,12 @@ class LinkedIn(Document):
             response = requests.delete(
                 url="https://api.linkedin.com/v2/ugcPosts/{0}".format(post_id),
                 headers=self.get_headers(),
-            )
-
+            )	
+            
             if response.status_code != 204 and response.content:
                 self.api_error(response)
             else:
-                frappe.msgprint("LinkedIn Post Delete successfully ", indicator="green")
+                frappe.msgprint("LinkedIn Post Delete successfully ", indicator='green')
         except Exception as e:
             self.api_error(response)
 
@@ -306,9 +309,10 @@ def callback(code=None, error=None, error_description=None):
 
 
 @frappe.whitelist(allow_guest=True)
-def post(text, title, docname, media=None, video=None):
+def post(text, title, docname , media=None, video=None):
     linkedin_settings = frappe.get_doc("LinkedIn")
-    linkedin_settings.post(text, title, docname, media, video)
+    linkedin_settings.post(text, title,docname , media, video )
+    
 
 
 @frappe.whitelist(allow_guest=True)

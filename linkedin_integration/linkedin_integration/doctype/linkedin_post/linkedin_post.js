@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Linkedin Post', {
 	refresh: function (frm) {
+		
 
 		frm.add_custom_button(__("Post"), function () {
 			if (parseInt(localStorage.getItem('LE'))) {

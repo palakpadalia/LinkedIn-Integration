@@ -27,7 +27,6 @@ frappe.ui.form.on('LinkedIn', {
 				</div>`
 			);
 		}
-
 		if (frm.doc.session_status == "Active") {
 			let d = new Date(frm.doc.modified);
 			d.setDate(d.getDate() + 60);
@@ -70,6 +69,8 @@ frappe.ui.form.on('LinkedIn', {
 	},
 	after_save: function (frm) {
 		localStorage.setItem('LE', frm.doc.enable)
-		frm.trigger("login");
+	},
+	fetch : function (frm) {
+		frm.trigger('login')
 	}
 });
